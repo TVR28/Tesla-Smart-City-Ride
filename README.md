@@ -2,6 +2,7 @@
 
 The Tesla SmartRide project is designed as a real-time data streaming and visualization system, intended to monitor a Tesla vehicle on its journey from Seattle to Cupertino. Although the typical setup would involve using IoT devices to capture diverse data points like vehicle telemetry, GPS coordinates, weather updates, and emergency incidents along the route, this project adapts by simulating this data. This approach mimics real-time IoT data streams, allowing the system to still effectively gather and process information as if it were coming directly from actual devices installed in the vehicle. The data, once collected, is processed and visualized on-the-fly using an integrated suite of Apache and AWS technologies. This not only provides instant insights into the vehicle’s performance in self driving environment and trip dynamics but also enhances the capability to make informed decisions and responses to any incidents or environmental changes during the trip. This setup is ideal for testing and demonstrating the potential of real-time data applications in smart city projects, even without access to physical IoT devices.
 
+![Pasted Graphic](https://github.com/TVR28/Tesla-SmartRide/assets/91713140/087d7dbf-ee01-4710-a81e-de4f004ce321)
 
 ## Table of Contents
 
@@ -13,7 +14,7 @@ The Tesla SmartRide project is designed as a real-time data streaming and visual
 - [Contributing](#contributing)
 - [License](#license)
 
-![Pasted Graphic](https://github.com/TVR28/Tesla-SmartRide/assets/91713140/087d7dbf-ee01-4710-a81e-de4f004ce321)
+
 
 ## System Architecture
 <img width="1251" alt="SYSTEM ARCHITECTURE" src="https://github.com/TVR28/Tesla-SmartRide/assets/91713140/e8aa6848-af5e-4e70-bad2-bc877b009f56">

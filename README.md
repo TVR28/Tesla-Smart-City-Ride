@@ -1,4 +1,4 @@
-# Tesla SmartRide - Smart City End-to-End Data Engineering Project
+# Tesla Smart City Ride
 
 ## Table of Contents
 

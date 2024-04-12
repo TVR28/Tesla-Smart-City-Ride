@@ -1,8 +1,10 @@
 # Tesla Smart City Ride
 
+Tesla SmartRide aims to provide a real-time data streaming and visualization system for a Tesla vehicle traveling from Seattle to Cupertino. The system utilizes IoT devices to collect various data points such as vehicle information, GPS coordinates, and weather conditions. This data is processed and visualized in real time, leveraging a stack of Apache and AWS technologies.
+
+
 ## Table of Contents
 
-- [Project Overview](#project-overview)
 - [System Architecture](#system-architecture)
 - [Data Flow](#data-flow)
 - [Installation and Configuration](#installation-and-configuration)
@@ -11,9 +13,6 @@
 - [Contributing](#contributing)
 - [License](#license)
 
-## Project Overview
-
-Tesla SmartRide aims to provide a real-time data streaming and visualization system for a Tesla vehicle traveling from Seattle to Cupertino. The system utilizes IoT devices to collect various data points such as vehicle information, GPS coordinates, and weather conditions. This data is processed and visualized in real time, leveraging a stack of Apache and AWS technologies.
 
 ![Project Overview Image](path/to/your/image.jpg)  <!-- Placeholder for project overview image -->
 

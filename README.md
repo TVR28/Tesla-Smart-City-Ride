@@ -13,10 +13,10 @@ Tesla SmartRide aims to provide a real-time data streaming and visualization sys
 - [Contributing](#contributing)
 - [License](#license)
 
-
-![Project Overview Image](path/to/your/image.jpg)  <!-- Placeholder for project overview image -->
+![Pasted Graphic](https://github.com/TVR28/Tesla-SmartRide/assets/91713140/087d7dbf-ee01-4710-a81e-de4f004ce321)
 
 ## System Architecture
+<img width="1251" alt="SYSTEM ARCHITECTURE" src="https://github.com/TVR28/Tesla-SmartRide/assets/91713140/e8aa6848-af5e-4e70-bad2-bc877b009f56">
 
 ### Components
 

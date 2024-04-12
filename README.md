@@ -1,6 +1,6 @@
 # Tesla Smart City Ride
 
-Tesla SmartRide aims to provide a real-time data streaming and visualization system for a Tesla vehicle traveling from Seattle to Cupertino. The system utilizes IoT devices to collect various data points such as vehicle information, GPS coordinates, and weather conditions. This data is processed and visualized in real time, leveraging a stack of Apache and AWS technologies.
+The Tesla SmartRide project is designed as a real-time data streaming and visualization system, intended to monitor a Tesla vehicle on its journey from Seattle to Cupertino. Although the typical setup would involve using IoT devices to capture diverse data points like vehicle telemetry, GPS coordinates, weather updates, and emergency incidents along the route, this project adapts by simulating this data. This approach mimics real-time IoT data streams, allowing the system to still effectively gather and process information as if it were coming directly from actual devices installed in the vehicle. The data, once collected, is processed and visualized on-the-fly using an integrated suite of Apache and AWS technologies. This not only provides instant insights into the vehicle’s performance in self driving environment and trip dynamics but also enhances the capability to make informed decisions and responses to any incidents or environmental changes during the trip. This setup is ideal for testing and demonstrating the potential of real-time data applications in smart city projects, even without access to physical IoT devices.
 
 
 ## Table of Contents
@@ -18,9 +18,7 @@ Tesla SmartRide aims to provide a real-time data streaming and visualization sys
 ## System Architecture
 <img width="1251" alt="SYSTEM ARCHITECTURE" src="https://github.com/TVR28/Tesla-SmartRide/assets/91713140/e8aa6848-af5e-4e70-bad2-bc877b009f56">
 
-### Components
-
-# Tesla SmartRide - Detailed Component Overview
+## Components
 
 ## 1. IoT Devices:
    - IoT devices in the Tesla vehicles collect a myriad of data in real-time, which includes GPS tracking for location, various vehicle telemetry data to assess performance and condition, and emergency data to respond to critical situations promptly. These devices are crucial for gathering the raw data needed for further processing and insights.
@@ -46,13 +44,10 @@ Tesla SmartRide aims to provide a real-time data streaming and visualization sys
 ## 8. Visualization Tools (PowerBI, Tableau, Looker Studio):
    - These tools are intended to be implemented to enable the visualization of the processed data into interpretable and interactive dashboards. PowerBI, Tableau, and Looker Studio can transform the structured data into visually appealing reports and dashboards that provide actionable insights, allowing stakeholders to make informed decisions based on the latest data.
 
-![System Architecture Image](path/to/another/image.jpg)  <!-- Placeholder for architecture image -->
 
 ## Data Flow
 
-![Data Flow Diagram](path/to/dataflow/image.jpg)  <!-- Placeholder for data flow diagram -->
-
-- Data collected by IoT devices in the Tesla is sent to Apache Kafka.
+- Data simulated instead of IoT devices(since I doon't have one but would love to implement) in the Tesla is sent to Apache Kafka and monitored using Zookeeper.
 - Apache Spark consumes this streaming data from Kafka.
 - The processed data is stored in AWS S3.
 - AWS Glue transforms and catalogs the data, making it available for querying.
@@ -66,6 +61,7 @@ Tesla SmartRide aims to provide a real-time data streaming and visualization sys
 - Python 3.9.6
 - Docker and Docker Compose installed
 - An active AWS account
+- Database Viewer like DBViewer or SQLiteViewer
 
 ### Setup Instructions
 
@@ -75,26 +71,36 @@ Tesla SmartRide aims to provide a real-time data streaming and visualization sys
    touch docker-compose.yml
    docker-compose up -d
    ```
+   ![Screenshot 2024-04-08 at 2 14 31 PM](https://github.com/TVR28/Tesla-SmartRide/assets/91713140/c4bb8b55-0938-4077-9e9d-e701f6a4ac50)
+
 2. **Create Spark Job Script:**
    ```bash
    touch jobs/spark-city.py
    ```
+   
 3. **Install Required Python Packages:**
+
    ```bash
    pip install confluent_kafka simplejson pyspark
    pip freeze > requirements.txt
    ```
+   
 4. **Run the Spark Application:**
+   
    ```bash
    docker exec -it smartcity-spark-master-1 spark-submit \ --master spark://spark-master:7077 \ --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk:1.11.469 jobs/spark-city.py
    ```
 5. **Monitoring the Application:**
+
    Access the Spark UI at `http://localhost:9090` to monitor the streaming process.
+
+   ![spark](https://github.com/TVR28/Tesla-SmartRide/assets/91713140/3d290928-706a-452b-94a7-ae72cee7e880)
+
    
 
-## Application Details
 
-The Tesla SmartRide application captures and processes data in real-time to provide insights into vehicle performance, route optimization, and environmental conditions. This is critical for smart city projects where data-driven decisions can significantly affect both safety and efficiency.
+## Application Details
+The Tesla SmartRide application is designed to gather and analyze data instantly, offering vital information about how the vehicle is performing, the best routes to take, and the current weather conditions. This is especially important for projects aimed at improving self driving assistance, city living, where making decisions based on accurate, up-to-date data can greatly enhance safety and operational efficiency. By processing this data in real time, the application helps ensure that both drivers and city planners have the insights they need to make informed decisions quickly, which is crucial in dynamic urban environments where conditions can change rapidly. This capability not only improves how well a vehicle operates on own but also contributes to broader smart city goals like enhanced and safe self driving capability and enhancing public safety.
 
 ## Future Work
 - Implementing the visualization layer using PowerBI, Tableau, or Looker Studio.

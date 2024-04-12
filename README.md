@@ -74,5 +74,38 @@ Tesla SmartRide aims to provide a real-time data streaming and visualization sys
    touch docker-compose.yml
    docker-compose up -d
    ```
+2. **Create Spark Job Script:**
+   ```bash
+   touch jobs/spark-city.py
+   ```
+3. **Install Required Python Packages:**
+   ```bash
+   pip install confluent_kafka simplejson pyspark
+   pip freeze > requirements.txt
+   ```
+4. **Run the Spark Application:**
+   ```bash
+   docker exec -it smartcity-spark-master-1 spark-submit \ --master spark://spark-master:7077 \ --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk:1.11.469 jobs/spark-city.py
+   ```
+5. **Monitoring the Application:**
+   Access the Spark UI at `http://localhost:9090` to monitor the streaming process.
+   
+
+## Application Details
+
+The Tesla SmartRide application captures and processes data in real-time to provide insights into vehicle performance, route optimization, and environmental conditions. This is critical for smart city projects where data-driven decisions can significantly affect both safety and efficiency.
+
+## Future Work
+- Implementing the visualization layer using PowerBI, Tableau, or Looker Studio.
+- Enhancing data processing and analysis features.
+
+## Contributing
+Interested in contributing? Great! Here are a few areas where you can help:
+
+- **Adding new features:** Have an idea for an improvement? Fork the repo, make your updates, and submit a pull request.
+- **Bug fixes:** Noticed a problem? Open an issue or submit a fix.
+- **Documentation:** Help keep our docs up to date and clear.
+For major changes, please open an issue first to discuss what you would like to change.
+
 
    

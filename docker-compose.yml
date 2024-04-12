@@ -1,0 +1,92 @@
+version: '3'
+
+x-spark-common: &spark-common
+  image: bitnami/spark:latest
+  volumes:
+    - ./jobs:/opt/bitnami/spark/jobs
+  command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077 #recieves info from the url of spark master
+  depends_on:
+    - spark-master
+  environment:
+    SPARK_MODE: Worker
+    SPARK_WORKER_CORES: 2
+    SPARK_WORKER_MEMORY: 1g #min of 1gig or else worker maynot work
+    SPARK_MASTER_URL: spark://spark-master:7077
+  networks:
+    - tvrdatalab
+
+
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0 #docker image
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"                        #container and localhost ports
+    environment: 
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    healthcheck:
+      test: ['CMD', 'bash','-c',"echo 'ruok' | nc localhost 2181"] #runs ruok in the terminal
+      interval: 10s
+      timeout: 5s
+      retries: 5      # no.of retries before it fails
+    networks: 
+      - tvrdatalab
+# By here, Zookeeper is successfully set up
+# Now we need to setup Kafka
+  broker: 
+    image: confluentinc/cp-server:7.4.0
+    hostname: broker
+    container_name: broker
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    ports:
+      - "9092:9092"
+      - "9091:9091"
+    environment:
+      KAFKA_BROKER_ID: 1 #using 1 broker
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT 
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092 #where its going to accep the connections
+      KAFKA_METRIC_REPORTERS: io.confluent.metric.reporter.ConfluentMetricsReporter #confluent related
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_JMX_PORT: 9101
+      KAFKA_JMX_HOSTNAME: localhost
+      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: http://schema-registry:8081 #useless here
+      CONFLUENT_METRIC_REPORTER_BOOTSTRAP_SERVICES: broker:29092
+      CONFLUENT_METRIC_REPORTER_TOPIC_REPLICAS: 1                      #confluent related
+      CONFLUENT_METRICS_ENABLE: 'false'
+      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
+    healthcheck:
+      test: [ "CMD", "bash", "-c", 'nc -z localhost 9092'] 
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - tvrdatalab
+  spark-master: 
+    image: bitnami/spark:latest
+    volumes:
+      - ./jobs:/opt/bitnami/spark/jobs
+    command: bin/spark-class org.apache.spark.deploy.master.Master
+    ports:
+      - "9090:8080" # Where the UI is and we can see activities on our spark cluster
+      - "7077:7077" # Spark Master URL - where we'll be submitting our jobs to
+    networks:
+      - tvrdatalab
+  
+  spark-worker-1:
+    <<: *spark-common #inherits from master
+  spark-worker-2:
+    <<: *spark-common
+  #We can have multiple workers based on computational resources.
+networks:
+  tvrdatalab: 

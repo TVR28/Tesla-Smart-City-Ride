@@ -103,6 +103,38 @@ The Tesla SmartRide project is designed as a real-time data streaming and visual
 ## Application Details
 The Tesla SmartRide application is designed to gather and analyze data instantly, offering vital information about how the vehicle is performing, the best routes to take, and the current weather conditions. This is especially important for projects aimed at improving self driving assistance, city living, where making decisions based on accurate, up-to-date data can greatly enhance safety and operational efficiency. By processing this data in real time, the application helps ensure that both drivers and city planners have the insights they need to make informed decisions quickly, which is crucial in dynamic urban environments where conditions can change rapidly. This capability not only improves how well a vehicle operates on own but also contributes to broader smart city goals like enhanced and safe self driving capability and enhancing public safety.
 
+## Data Management and Visualization with AWS and DB Viewer
+
+Our Tesla SmartRide project's data management and visualization components are a testament to the seamless integration of various AWS services and sophisticated database tools. Each part of our system plays a pivotal role in transforming raw data into actionable insights.
+
+### AWS Glue and Crawlers
+
+In the AWS Glue console image, we see multiple data crawlers listed, each corresponding to different data sets such as emergency data, GPS data, and weather data. These crawlers automatically discover and catalog metadata from the stored data, making it easy to maintain a current schema and prepare for analysis.
+
+![awsglue](https://github.com/TVR28/Tesla-SmartRide/assets/91713140/ce44bf7b-1464-48f3-867f-6104a84af395)
+
+### Amazon S3 Data Storage
+
+The images show the S3 bucket structure, organizing data into folders corresponding to different data streams. Here, data is stored in the Parquet format, a columnar storage file format optimized for speed in analytics workloads. This structure demonstrates how data is segmented and stored for efficient access and analysis.
+
+![weather_data_s3](https://github.com/TVR28/Tesla-SmartRide/assets/91713140/bbbc5332-7af8-4ac6-8153-3f3728673be5)
+
+![s3-smartcity](https://github.com/TVR28/Tesla-SmartRide/assets/91713140/7ea1874e-9d93-493d-958c-b6ef97242bac)
+
+
+### AWS Glue Data Catalog Tables
+
+AWS Glue's Data Catalog provides a unified metadata repository across AWS services. The screenshot displays various tables created by the crawlers, now a part of the data catalog. These tables are used as sources or targets in ETL jobs and for query purposes, which enables streamlined data management and retrieval processes.
+
+![awsgluetables](https://github.com/TVR28/Tesla-SmartRide/assets/91713140/d24521f3-e136-46eb-9f27-98733ed4f984)
+
+### Database Viewer with DBeaver
+
+DBeaver, a powerful DB viewer, is depicted showing a detailed view of the `emergency_data` table. It allows us to query and manipulate the data visually, making it easier to perform complex SQL queries and data analysis. This database viewer serves as an interface between the user and the stored data, which could be in Redshift or another database system, for comprehensive data investigation and manipulation.
+
+![dbeaver](https://github.com/TVR28/Tesla-SmartRide/assets/91713140/a13f5520-d9d0-4d58-9643-14aede6a6d8b)
+
+
 ## Future Work
 - Implementing the visualization layer using PowerBI, Tableau, or Looker Studio.
 - Enhancing data processing and analysis features.
@@ -110,10 +142,10 @@ The Tesla SmartRide application is designed to gather and analyze data instantly
 ## Contributing
 Interested in contributing? Great! Here are a few areas where you can help:
 
+- **Data Visualization:** Implement the visualization layer using PowerBI, Tableau, or Looker Studio.
 - **Adding new features:** Have an idea for an improvement? Fork the repo, make your updates, and submit a pull request.
 - **Bug fixes:** Noticed a problem? Open an issue or submit a fix.
 - **Documentation:** Help keep our docs up to date and clear.
+
 For major changes, please open an issue first to discuss what you would like to change.
 
-
-   

@@ -21,8 +21,8 @@ The Tesla SmartRide project is designed as a real-time data streaming and visual
 
 ## Components
 
-## 1. IoT Devices:
-   - IoT devices in the Tesla vehicles collect a myriad of data in real-time, which includes GPS tracking for location, various vehicle telemetry data to assess performance and condition, and emergency data to respond to critical situations promptly. These devices are crucial for gathering the raw data needed for further processing and insights.
+## 1. Vehicle Information:
+   - Vehicle information is siulated in real-time, which includes GPS tracking for location, various vehicle telemetry data to assess performance and condition, and emergency data to respond to critical situations promptly. This data is simulated to mimic real-time data from an IoT device.
 
 ## 2. Apache Zookeeper:
    - Apache Zookeeper plays a pivotal role in managing and synchronizing the distributed services within the ecosystem, specifically focusing on Kafka brokers. It helps maintain configuration information, naming, providing distributed synchronization, and providing group services to ensure that the Kafka cluster operates smoothly and consistently without data loss.
